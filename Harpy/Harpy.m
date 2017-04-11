@@ -410,16 +410,19 @@ NSString * const HarpyLanguageVietnamese            = @"vi";
     // Reference App's name
     _appName = _appName ? _appName : [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleNameKey];
 
+    NSString *titleKey = @"Update Available";
+    NSString *messageFormatKey = @"A new version of %@ is available. Please update to version %@ now.";
+    
     // Force localization if _forceLanguageLocalization is set
     if (_forceLanguageLocalization) {
-        _updateAvailableMessage = [self forcedLocalizedStringForKey:@"Update Available"];
-        _theNewVersionMessage = [NSString stringWithFormat:[self forcedLocalizedStringForKey:@"A new version of %@ is available. Please update to version %@ now."], _appName, currentAppStoreVersion];
+        _updateAvailableMessage = self.customAlertTitle.length ? self.customAlertTitle : [self forcedLocalizedStringForKey:titleKey];
+        _theNewVersionMessage = self.customAlertMessage.length ? self.customAlertMessage : [NSString stringWithFormat:[self forcedLocalizedStringForKey:messageFormatKey], _appName, currentAppStoreVersion];
         _updateButtonText = [self forcedLocalizedStringForKey:@"Update"];
         _nextTimeButtonText = [self forcedLocalizedStringForKey:@"Next time"];
         _skipButtonText = [self forcedLocalizedStringForKey:@"Skip this version"];
     } else {
-        _updateAvailableMessage = [self localizedStringForKey:@"Update Available"];
-        _theNewVersionMessage = [NSString stringWithFormat:[self localizedStringForKey:@"A new version of %@ is available. Please update to version %@ now."], _appName, currentAppStoreVersion];
+        _updateAvailableMessage = self.customAlertTitle.length ? self.customAlertTitle :  [self localizedStringForKey:titleKey];
+        _theNewVersionMessage = self.customAlertMessage.length ? self.customAlertMessage : [NSString stringWithFormat:[self localizedStringForKey:messageFormatKey], _appName, currentAppStoreVersion];
         _updateButtonText = [self localizedStringForKey:@"Update"];
         _nextTimeButtonText = [self localizedStringForKey:@"Next time"];
         _skipButtonText = [self localizedStringForKey:@"Skip this version"];

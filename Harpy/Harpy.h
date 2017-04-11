@@ -96,6 +96,16 @@ typedef NS_ENUM(NSUInteger, HarpyAlertType)
 @property (nonatomic, strong) NSString *appName;
 
 /**
+ @b OPTIONAL: The preferred title for alert. This string will be displayed in the @c UIAlertView in place of title.
+ */
+@property (nonatomic, strong) NSString *customAlertTitle;
+
+/**
+ @b OPTIONAL: The preferred message for alert. This string will be displayed in the @c UIAlertView in place of message.
+ */
+@property (nonatomic, strong) NSString *customAlertMessage;
+
+/**
  @b OPTIONAL: Log Debug information
  */
 @property (nonatomic, assign, getter=isDebugEnabled) BOOL debugEnabled;
